@@ -1,0 +1,76 @@
+<form #bookForm="ngForm">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<section>
+					<header class="header">
+						<div class="row">
+							<div class="col-md-10">
+								<h4>Users</h4>
+							</div>
+							<div class="col-md-6"></div>
+							<div class="col-md-2"></div>
+						</div>
+
+					</header>
+				</section>
+				<section>
+					<div class="panel panel-info">
+						<div class="panel-heading text-center">
+							<h4>Find by first name</h4>
+						</div>
+
+						<div style="width: 400px;" class="form-group">
+							<table class="table">
+								<tr>
+									<td><label for="firstName">First Name:</label></td>
+									<td><input type="text" class="form-control" id="firstName" minlength="4" required [(ngModel)]="firstName" #name="ngModel"
+										 name="firstName">
+										<div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
+											<div *ngIf="name.errors.required">
+												Name is required.
+											</div>
+											<div *ngIf="name.errors.minlength">
+												Name must be at least 4 characters long.
+											</div>
+											<div *ngIf="name.errors.forbiddenName">
+												Name cannot be Bob.
+											</div>
+										</div>
+									</td>
+									<td><button type="submit" class="btn btn-success" (click)="findByFirstName(firstName)">Submit</button></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</section>
+
+				<section class="main">
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>SSO</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let person of persons">
+								<th scope="row">{{person.id}}</th>
+								<td>{{person.firstNm}}</td>
+								<td>{{person.lastNm}}</td>
+								<td>
+									<button type="button" class="btn btn-success" (click)="returnToHome()"> Edit </button>
+									<button type="button" class="btn btn-danger"> Cancel </button>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</section>
+			</div>
+		</div>
+	</div>
+</form>
